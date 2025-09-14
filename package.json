@@ -5,7 +5,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev.cron": "node -r ts-node/register --env-file=.env src/cron.ts",
-    "dev.main": "node -r ts-node/register --env-file=.env src/runMain.ts"
+    "dev.main": "node -r ts-node/register --env-file=.env src/main.ts",
+    "build": "npx tsc",
+    "start": "node --env-file=.env dist/main.js",
+    "ci": "pnpm run build & pnpm run start"
   },
   "keywords": [],
   "author": "",
