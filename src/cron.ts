@@ -1,9 +1,9 @@
 import cron from "node-cron";
-import { main } from "./main";
+import { scrapeAndBroadcast } from "./scrapeAndBroadcast";
 
 // TODO: change cron timing
 const task = cron.schedule("* * * * * *", async () => {
-  main();
+  scrapeAndBroadcast();
   task.stop();
   task.destroy();
 });
