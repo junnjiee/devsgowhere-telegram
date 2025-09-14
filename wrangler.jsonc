@@ -1,5 +1,5 @@
 {
-  "name": "devsgowhere-broadcast-worker",
+  "name": "devsgowhere-telegram",
   "compatibility_date": "2025-09-14",
   "assets": {
     "directory": "./dist"
