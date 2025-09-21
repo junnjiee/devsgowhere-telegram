@@ -1,4 +1,4 @@
-export type event = {
+export type eventType = {
   org: string;
   title: string;
   datetime: string;
@@ -11,7 +11,7 @@ export type event = {
   date: string;
 };
 
-export type rsvpDetails = {
+export type rsvpDetailsType = {
   medium: string;
   url: string;
 };

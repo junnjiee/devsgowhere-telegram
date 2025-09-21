@@ -1,6 +1,5 @@
 import axios, { isAxiosError } from "axios";
-import { eventsScraper } from "./scraper";
-import { filterEvents, craftWeeklyEventsDigestMsg } from "./events";
+import { filterEventsByDate, craftWeeklyEventsDigestMsg, eventsScraper } from "./event";
 
 export async function scrapeAndBroadcast() {
   const message = await scrapeAndCreateMsg();
@@ -16,7 +15,7 @@ export async function scrapeAndBroadcast() {
 async function scrapeAndCreateMsg() {
   try {
     const events = await eventsScraper(process.env.TARGET_URL!);
-    const filteredEvents = filterEvents(events);
+    const filteredEvents = filterEventsByDate(events);
     const message = craftWeeklyEventsDigestMsg(filteredEvents);
 
     return message;
@@ -26,7 +25,7 @@ async function scrapeAndCreateMsg() {
   }
 }
 
-async function sendTelegramMsg(message: string) {
+export async function sendTelegramMsg(message: string) {
   const url = `${process.env.TELEGRAM_API_URL}/bot${process.env.BOT_TOKEN}/sendMessage`;
   const payload = {
     chat_id: process.env.CHANNEL_NAME,
