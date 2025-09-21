@@ -83,7 +83,7 @@ export async function eventsScraper(url: string): Promise<eventType[]> {
   }
 }
 
-export async function eventPageDetailsScraper(
+async function eventPageDetailsScraper(
   url: string
 ): Promise<Record<string, string>> {
   try {
