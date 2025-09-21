@@ -9,7 +9,8 @@ export async function sendTelegramMsg(message: string) {
     text: message,
     parse_mode: "HTML",
     link_preview_options: {
-      is_disabled: true,
+      // is_disabled: true,
+      show_above_text: true,
     },
   };
 

@@ -24,10 +24,13 @@ export async function main() {
 
   const msgStatus = await Promise.all(
     filteredEvents.map(async (event) => {
-      return await sendTelegramMsg(craftMessage(event));
+      const success = await sendTelegramMsg(craftMessage(event));
+      if (success) {
+        // markEventsAsBroadcasted([event]);
+      }
+      return success;
     })
   );
-  markEventsAsBroadcasted(filteredEvents);
 
   console.log({
     job_completed_on: new Date().toLocaleString("en", {

@@ -6,6 +6,7 @@ export type eventType = {
   address: string;
   url: string;
   desc: string;
+  imgUrl: string;
   rsvpMedium: string;
   rsvpUrl: string;
   day: string;
@@ -13,3 +14,10 @@ export type eventType = {
 };
 
 export type broadcastedEventsType = Record<string, Record<string, string>>;
+
+export type eventDetailsScraperResponseType = {
+  desc: string;
+  imgUrl: string;
+  rsvpMedium: string;
+  rsvpUrl: string;
+};
