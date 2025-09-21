@@ -1,29 +1,6 @@
 import axios, { isAxiosError } from "axios";
-import { filterEventsByDate, craftWeeklyEventsDigestMsg, eventsScraper } from "./event";
-
-export async function scrapeAndBroadcast() {
-  const message = await scrapeAndCreateMsg();
-  const teleMsgSuccess = await sendTelegramMsg(message);
-  console.log({
-    job_completed_on: new Date().toLocaleString("en", {
-      timeZone: "Asia/Singapore",
-    }),
-    success: teleMsgSuccess,
-  });
-}
-
-async function scrapeAndCreateMsg() {
-  try {
-    const events = await eventsScraper(process.env.TARGET_URL!);
-    const filteredEvents = filterEventsByDate(events);
-    const message = craftWeeklyEventsDigestMsg(filteredEvents);
-
-    return message;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-}
+import { capitalizeFirstLetter } from "./utils";
+import { eventType } from "./types/event";
 
 export async function sendTelegramMsg(message: string) {
   const url = `${process.env.TELEGRAM_API_URL}/bot${process.env.BOT_TOKEN}/sendMessage`;
@@ -53,4 +30,17 @@ export async function sendTelegramMsg(message: string) {
     }
     return false;
   }
+}
+
+export function craftMessage(event: eventType) {
+  return `<b>${event.title}</b>\n
+<u><b>🚀 Event Details</b></u>
+🏠 Host: ${event.org}
+🗓️ Date: ${event.day}, ${event.datetime}
+📍 Venue: ${event.location}, ${capitalizeFirstLetter(event.address)}
+🔍 <b><a href="${event.url}">Event Page</a></b>
+🎫 <b><a href="${event.rsvpUrl}">${event.rsvpMedium}</a></b>\n
+<u><b>🚀 Event Description</b></u>
+${event.desc}
+`;
 }

@@ -3,7 +3,7 @@ import {
   filterNewEvents,
   markEventsAsBroadcasted,
 } from "./event";
-import { sendTelegramMsg } from "./telegram";
+import { sendTelegramMsg, craftMessage } from "./telegram";
 
 interface Env {}
 interface ScheduledController {}
@@ -18,14 +18,13 @@ export default {
   },
 };
 
-// TODO: remove export
 export async function main() {
   const scrapedEvents = await eventsScraper(process.env.TARGET_URL!);
   const filteredEvents = filterNewEvents(scrapedEvents);
 
   const msgStatus = await Promise.all(
     filteredEvents.map(async (event) => {
-      return await sendTelegramMsg(event.title);
+      return await sendTelegramMsg(craftMessage(event));
     })
   );
   markEventsAsBroadcasted(filteredEvents);
