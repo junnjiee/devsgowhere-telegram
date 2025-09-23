@@ -4,7 +4,7 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "wrangler dev",
+    "dev": "wrangler dev --test-scheduled",
     "build": "npx tsc"
   },
   "keywords": [],
@@ -12,14 +12,14 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "axios": "^1.11.0",
-    "cheerio": "^1.1.2",
-    "wrangler": "^4.38.0"
+    "axios": "1.11.0",
+    "cheerio": "1.1.2",
+    "wrangler": "4.38.0"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.35",
-    "@types/node": "^24.3.1",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.9.2"
+    "@types/cheerio": "0.22.35",
+    "@types/node": "24.3.1",
+    "ts-node": "10.9.2",
+    "typescript": "5.9.2"
   }
 }
