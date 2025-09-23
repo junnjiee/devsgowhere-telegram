@@ -1,49 +1,6 @@
-import fs from "fs";
 import axios from "axios";
 import * as cheerio from "cheerio";
-import {
-  eventType,
-  broadcastedEventsType,
-  eventDetailsScraperResponseType,
-} from "./types/event";
-
-export function markEventsAsBroadcasted(events: eventType[]) {
-  const filePath = "./src/data/broadcastedEvents.json";
-  const currentContent = fs.readFileSync(filePath, "utf-8");
-  const existingEvents: broadcastedEventsType = JSON.parse(currentContent);
-
-  const updatedBroadcastedEvents: broadcastedEventsType = {
-    ...existingEvents,
-  };
-
-  // NOTE: this fn mutates updatedBroadcastedEvents in-place
-  events.forEach((event) => {
-    if (!updatedBroadcastedEvents[event.date]) {
-      updatedBroadcastedEvents[event.date] = {};
-    }
-    // NOTE: used non-null assertion
-    updatedBroadcastedEvents[event.date]![event.title] = "";
-  });
-
-  fs.writeFileSync(
-    filePath,
-    JSON.stringify(updatedBroadcastedEvents, null, 2),
-    "utf-8"
-  );
-}
-
-export function filterNewEvents(events: eventType[]) {
-  const filePath = "./src/data/broadcastedEvents.json";
-  const currentContent = fs.readFileSync(filePath, "utf-8");
-  const broadcastedEvents: broadcastedEventsType = JSON.parse(currentContent);
-
-  return events.filter((event) => {
-    const broadcastedEventsByDate = broadcastedEvents[event.date];
-    return (
-      !broadcastedEventsByDate || !(event.title in broadcastedEventsByDate)
-    );
-  });
-}
+import { eventType, eventDetailsScraperResponseType } from "./types/event";
 
 export async function eventsScraper(url: string): Promise<eventType[]> {
   try {

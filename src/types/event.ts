@@ -13,8 +13,6 @@ export type eventType = {
   date: string;
 };
 
-export type broadcastedEventsType = Record<string, Record<string, string>>;
-
 export type eventDetailsScraperResponseType = {
   desc: string;
   imgUrl: string;
