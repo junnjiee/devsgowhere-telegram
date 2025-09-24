@@ -3,3 +3,4 @@ dist
 .env
 .wrangler
 wrangler.jsonc
+keys.json
