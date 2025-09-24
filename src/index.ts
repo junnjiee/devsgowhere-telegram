@@ -9,9 +9,10 @@ export default {
   ) {
     try {
       const scrapedEvents = await eventsScraper(env.TARGET_URL);
-      const filteredEvents = scrapedEvents.filter(
-        (event) => env.BROADCASTED_EVENTS.get(event.title) === null
-      );
+      const filteredEvents = scrapedEvents.filter(async (event) => {
+        const kvTitle = await env.BROADCASTED_EVENTS.get(event.title);
+        return kvTitle === null;
+      });
 
       const msgStatus = await Promise.all(
         filteredEvents.map(async (event) => {
