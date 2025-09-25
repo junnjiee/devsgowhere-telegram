@@ -24,6 +24,7 @@
   },
 
   "env": {
+    // environment variables for development
     "dev": {
       "vars": {
         "TARGET_URL": "https://devsgowhere.com",
@@ -42,6 +43,7 @@
       }
     },
 
+    // environment variables for deployment to production
     "prod": {
       "vars": {
         "TARGET_URL": "https://devsgowhere.com",
