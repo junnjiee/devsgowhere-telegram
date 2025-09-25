@@ -1,0 +1,62 @@
+{
+  "name": "devsgowhere-telegram",
+  "main": "src/index.ts",
+  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_date": "2025-09-22",
+
+  "triggers": {
+    "crons": ["0 0 * * mon-sun"]
+  },
+
+  "observability": {
+    "enabled": true
+  },
+
+  "kv_namespaces": [
+    {
+      "binding": "BROADCASTED_EVENTS",
+      "id": "<workers-kv-ID>"
+    }
+  ],
+
+  "ai": {
+    "binding": "AI"
+  },
+
+  "env": {
+    "dev": {
+      "vars": {
+        "TARGET_URL": "https://devsgowhere.com",
+        "TELEGRAM_API_URL": "https://api.telegram.org",
+        "CHANNEL_NAME": "@<telegram-channel-name>"
+      },
+      "kv_namespaces": [
+        {
+          "binding": "BROADCASTED_EVENTS",
+          "id": "<workers-kv-ID>"
+        }
+      ],
+      "ai": {
+        "binding": "AI",
+        "remote": true
+      }
+    },
+
+    "prod": {
+      "vars": {
+        "TARGET_URL": "https://devsgowhere.com",
+        "TELEGRAM_API_URL": "https://api.telegram.org",
+        "CHANNEL_NAME": "@<telegram-channel-name>"
+      },
+      "kv_namespaces": [
+        {
+          "binding": "BROADCASTED_EVENTS",
+          "id": "<workers-kv-ID>"
+        }
+      ],
+      "ai": {
+        "binding": "AI"
+      }
+    }
+  }
+}
