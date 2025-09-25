@@ -39,9 +39,9 @@ export function craftMessage(event: eventType) {
 🏠 Host: ${event.org}
 🗓️ Date: ${event.day}, ${event.datetime}
 📍 Venue: ${event.location}, ${capitalizeFirstLetter(event.address)}
-🔍 <b><a href="${event.url}">Event Page</a></b>
+🔍 <b><a href="${event.url}">More Details</a></b>
 🎫 <b><a href="${event.rsvpUrl}">${event.rsvpMedium}</a></b>\n
-<u><b>🚀 Event Description</b></u>
+<u><b>🚀 Event Description (Summarised)</b></u>
 ${event.desc}
 `;
 }
