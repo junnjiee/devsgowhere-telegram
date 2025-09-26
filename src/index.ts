@@ -13,10 +13,17 @@ export default {
   ) {
     try {
       const scrapedEvents = await eventsScraper(env.TARGET_URL);
-      const filteredEvents = scrapedEvents.filter(async (event) => {
-        const kvTitle = await env.BROADCASTED_EVENTS.get(event.title);
-        return kvTitle === null;
-      });
+
+      // for array.filter(predicate) in JS, the predicate function is synchronous
+      // thus, check whether event has already been broadcasted (requires async)
+      // before filtering scrapedEvents
+      const broadcasted = await Promise.all(
+        scrapedEvents.map(
+          async (event) =>
+            (await env.BROADCASTED_EVENTS.get(event.title)) === null
+        )
+      );
+      const filteredEvents = scrapedEvents.filter((_, idx) => broadcasted[idx]);
 
       const msgStatus = await Promise.all(
         filteredEvents.map(async (event) => {
