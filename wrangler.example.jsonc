@@ -2,7 +2,7 @@
   "name": "devsgowhere-telegram",
   "main": "src/index.ts",
   "compatibility_flags": ["nodejs_compat"],
-  "compatibility_date": "2025-09-22",
+  "compatibility_date": "2025-09-17",
 
   "triggers": {
     "crons": ["0 0 * * mon-sun"]
