@@ -9,8 +9,6 @@ export type eventType = {
   imgUrl: string;
   rsvpMedium: string;
   rsvpUrl: string;
-  day: string;
-  date: string;
 };
 
 export type eventDetailsScraperResponseType = {

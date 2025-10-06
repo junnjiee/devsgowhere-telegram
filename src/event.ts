@@ -26,19 +26,7 @@ export async function eventsScraper(url: string): Promise<eventType[]> {
     });
 
     const event: eventType[] = await Promise.all(eventPromise.get());
-
-    // NOTE: using the date in <legend> element for filtering, since date in the .event-card
-    // element has inconsistent date formatting (e.g. Sept instead of Sep)
-    return $(".event-date > fieldset > legend")
-      .map((idx, element) => {
-        const dayDate = $(element).text().split(",");
-        return {
-          ...event[idx],
-          day: dayDate[0]?.trim(),
-          date: dayDate[1]?.trim(),
-        };
-      })
-      .get();
+    return event;
   } catch (error) {
     console.error(error);
     throw error;

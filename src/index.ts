@@ -46,7 +46,7 @@ export default {
           );
 
           if (teleMsgSuccess) {
-            await env.BROADCASTED_EVENTS.put(event.title, event.date);
+            await env.BROADCASTED_EVENTS.put(event.title, event.datetime);
           }
           return teleMsgSuccess;
         })
