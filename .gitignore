@@ -1,6 +1,10 @@
+# environment
 node_modules
 dist
 .env
+
+# wrangler 
 .wrangler
 wrangler.jsonc
 keys.json
+worker-configuration.d.ts
